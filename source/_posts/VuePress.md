@@ -1,21 +1,21 @@
 ---
 title: VuePress
-tags: Tech
-categories: 工具技巧
+tags: 
+categories: ECS七天训练营
 date: 2020-08-06 20:24:25
 ---
 
-### VuePress
+## VuePress
 
 轻量级文档服务器，可以用做博客和技术文档，可以部署在Github
 
-#### VuePress优点
+### VuePress优点
 
 1.  界面简洁优雅
 2.  支持Markdown语法
 3.  渲染静态HTML，性能优异
 
-#### 远程安装VuePress
+### 远程安装VuePress
 
 1.  设置安全组
 
@@ -47,7 +47,7 @@ date: 2020-08-06 20:24:25
 
 **VuePress目录结构**
 
-![](https://cdn.nlark.com/yuque/0/2020/png/1851434/1596704110238-7fb2ae62-7178-4da8-a307-54011f5c4e2e.png)
+![](https://pic.oldzhg.com/uPic/ibSXcC.png)
 
 ### 配置VuePress
 
@@ -65,10 +65,6 @@ date: 2020-08-06 20:24:25
 9.  回到最初的目录`cd ../../`
 10.  然后启动vuepress`vuepress dev docs`
 11.  打开浏览器输入服务器公网ip及端口号8080，即可看见刚刚写入的hello  VuePress
-
-### 
-
-### 
 
 ### 个性化定制
 

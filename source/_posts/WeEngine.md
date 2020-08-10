@@ -1,7 +1,7 @@
 ---
 title: 基于ECS构建微信公众号管理系统
-tags: Tech
-categories: 工具技巧
+tags: 
+categories: ECS七天训练营
 date: 2020-08-08 21:01:22
 ---
 
@@ -55,4 +55,3 @@ chown -R www /data/wwwroot/wechat
 <img src="https://pic.oldzhg.com/uPic/image-20200808205941459.png" alt="image-20200808205941459" style="zoom:50%;" />
 
 
- 
