@@ -26,7 +26,7 @@ avatar: https://pic.oldzhg.com/uPic/fqyOu3.jpg
 keywords: forsigner,前端,设计,Hexo主题,前端开发,用户体验,设计,frontend,design,nodejs,JavaScript
 
 links:
-  Blog: /archives
+  # Blog: /archives
 #  Category:
 #  Tags:
 #  Link:
@@ -39,7 +39,7 @@ links:
 #  ZhiHu: https://www.zhihu.com/people/sirice
 #  LinkedIn:
 #  FaceBook:
-  Twitter: https://www.twitter.com/oldzhg
+#  Twitter: https://www.twitter.com/oldzhg
 #  Skype:
 #  CodeSandBox:
 #  CodePen:
@@ -51,8 +51,9 @@ links:
 #  YouTube:
 #  QQ:
   Weibo: https://weibo.com/u/6499612648
-#  WeChat:
+  WeChat: https://t.me/oldzhg
   Github: https://github.com/oldzhg
+# Telegram: https://t.me/oldzhg
 
 # how links show: you have 2 choice--text or icon.
 links_text_enable: false
