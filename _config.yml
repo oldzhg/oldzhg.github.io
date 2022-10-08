@@ -78,22 +78,22 @@ theme: chic
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   - type: git
-    repo: https://github.com/oldzhg/oldzhg.github.io.git
+    repo: git@github.com:oldzhg/oldzhg.github.io.git
     branch: master
   - type: git
-    repo: https://github.com/oldzhg/oldzhg.github.io.git
+    repo: git@github.com:oldzhg/oldzhg.github.io.git
     branch: hexo
     extend_dirs: /
     ignore_hidden: false
     ignore_pattern:
         public: .
-  - type: git
-    repo: https://git.coding.net/oldzhg/blog-mirror.git
-    branch: master
-  - type: git
-    repo: https://git.coding.net/oldzhg/blog-mirror.git
-    branch: hexo
-    extend_dirs: /
-    ignore_hidden: false
-    ignore_pattern:
-        public: .
+            #  - type: git
+            #repo: https://git.coding.net/oldzhg/blog-mirror.git
+            #branch: master
+            #- type: git
+            # repo: https://git.coding.net/oldzhg/blog-mirror.git
+            #branch: hexo
+            #extend_dirs: /
+            #ignore_hidden: false
+            #ignore_pattern:
+            #public: .
