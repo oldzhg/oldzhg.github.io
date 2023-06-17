@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Old zhg">
+
+
+
+
+
+<title>Django学习笔记 | 白驹过隙</title>
+
+
+
+    <link rel="icon" href="https://pic.oldzhg.com/uPic/FIKIOQ.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="白驹过隙" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Drizzt&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/categories">分类</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Drizzt&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/categories">分类</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开目录</a>
+        <a onclick="go_top()">回到顶部</a>
+        <a onclick="go_bottom()">前往底部</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "折叠目录"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开目录"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Django学习笔记</h1>
+            
+                <div class="post-meta">
+                    
+                        作者: <a itemprop="author" rel="author" href="/">Old zhg</a>
+                    
+
+                    
+                        <span class="post-time">
+                        日期: <a href="#">March 23, 2020</a>
+                        </span>
+                    
+                    <br/>
+                        
+                    
+                        <span class="post-count">
+                            字数统计:
+                        <a href="">2.7k</a>  
+                        </span>
+                    
+                    
+                        <span class="post-count">
+                            阅读时长:
+                        <a href="">10 分钟</a>  
+                        </span>
+                    
+                    <!--文章浏览量-->
+                    <!-- 
+                        <span id="busuanzi_container_page_pv">
+                        阅读量
+                        <a href="" id="busuanzi_value_page_pv"></a>
+                    </span>
+                     -->
+                    <!-- 添加完成 -->
+                    
+                        <span class="post-category">
+                    分类:
+                            
+                                <a href="/categories/%E5%B7%A5%E5%85%B7%E6%8A%80%E5%B7%A7/">工具技巧</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="django使用https"><a href="#django使用https" class="headerlink" title="django使用https"></a>django使用https</h1><p>使用 runserver 是不能使用 https 的</p>
+<p>解决办法:使用 runsslserver</p>
+<p>步骤:</p>
+<p>1.安装:</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">install </span>django-<span class="keyword">extensions </span></span><br><span class="line">pip <span class="keyword">install </span>django-werkzeug-debugger-runserver </span><br><span class="line">pip <span class="keyword">install </span>pyOpenSSL</span><br></pre></td></tr></table></figure>
+
+<p>2.启动方式</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runsslserver <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">8100</span> \</span><br><span class="line">--certificate /etc/pki/libvirt-spice/server-cert.pem \</span><br><span class="line">--key /etc/pki/libvirt-spice/server-key.pem </span><br><span class="line">或者</span><br><span class="line">python3 manage.py runsslserver <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">8000</span> --certificate /path/to/certificate.crt --key /path/to/key.key</span><br></pre></td></tr></table></figure>
+
+<p>3.修改setting.py中的INSTALLED_APPS</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = (...</span><br><span class="line"><span class="string">"sslserver"</span>,</span><br><span class="line">...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>又拍云默认屏蔽了请求源站后的跟随参数，如果配置了CDN值得注意</p>
+<p>Django两种请求方式GET和POST</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">request</span><span class="selector-class">.GET</span><span class="selector-attr">[<span class="string">'username'</span>]</span></span><br><span class="line"><span class="selector-tag">request</span><span class="selector-class">.POST</span><span class="selector-attr">[<span class="string">'username'</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是<strong>POST可以接受空值，而GET接受空值时会报错</strong>，可以加条件判断跳过</p>
+<p>也可以采用下面这种方式</p>
+<p>Try this and observe username printed: <code>http://127.0.0.1:8000/StartPage?username=test</code>.</p>
+<p>Use <a href="https://docs.python.org/2/library/stdtypes.html#dict.get" target="_blank" rel="noopener"><code>get()</code></a> and avoid <code>MultiValueDictKeyError</code> errors:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.GET.get(<span class="string">'username'</span>, <span class="string">''</span>)</span><br></pre></td></tr></table></figure>
+
+<p>后面可以设置成为空的默认参数</p>
+<p>还有前后传参的时候不要把变量名写错了，不然会很麻烦。</p>
+<p>看这位大佬就排除半天问题，最后仅仅是因为一个变量名的原因。</p>
+<blockquote>
+<p>此处之所以出错，获取不到，是因为之前同事笔误，把参数名：function_group_id，误写为了fucntion_group_id，改回来，即可正常传递参数了。</p>
+<p>​                                                                                                                                            ———<a href="https://www.crifan.com/django_request_query_params_cannot_receive_get_para/" target="_blank" rel="noopener">引用来源</a></p>
+</blockquote>
+<h1 id="基于Django框架的网站部署"><a href="#基于Django框架的网站部署" class="headerlink" title="基于Django框架的网站部署"></a><a href="https://segmentfault.com/a/1190000008507042" target="_blank" rel="noopener">基于Django框架的网站部署</a></h1><h2 id="1-域名"><a href="#1-域名" class="headerlink" title="1.域名"></a>1.域名</h2><p>    首先，当我们输入一个网址<a href="http://www.example.com/时，首先经过DNS解析到对应的IP地址，从而对该IP实现访问。所以，要让别人访问我们项目的第一步，就是需要拥有两样东西，域名和公网ip。" target="_blank" rel="noopener">http://www.example.com/时，首先经过DNS解析到对应的IP地址，从而对该IP实现访问。所以，要让别人访问我们项目的第一步，就是需要拥有两样东西，域名和公网ip。</a><br>    域名的获得很简单，随便注册购买一个就好了。然后需要的是将域名解析到你的公网ip。而公网ip，一般在购买云服务器的时候能获得。<br>    经过这一步，我们实现了：请求–&gt;DNS–&gt;服务器ip，而我们的最终目的就是：请求–&gt;DNS–&gt;服务器ip–&gt;黑盒子–&gt;项目wsgi应用</p>
+<h2 id="2-使用gunicorn运行项目"><a href="#2-使用gunicorn运行项目" class="headerlink" title="2.使用gunicorn运行项目"></a>2.使用gunicorn运行项目</h2><p>具体gunicorn 的使用可以自行google一下</p>
+<h2 id="3-nginx接收外部请求，内部转发"><a href="#3-nginx接收外部请求，内部转发" class="headerlink" title="3.nginx接收外部请求，内部转发"></a>3.nginx接收外部请求，内部转发</h2><p>在/etc/nginx/sites-available/文件夹下，新建一个文件blog，并添加如下简单设置</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  你的域名 你的公网ip(可选);</span><br><span class="line">    <span class="attribute">access_log</span>  /var/log/nginx/blog.log;</span><br><span class="line">    <span class="attribute">location</span> /static &#123;</span><br><span class="line">        <span class="comment">#静态文件如js，css的存放目录</span></span><br><span class="line">        <span class="attribute">root</span> /project/blog;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">include</span> proxy_params;</span><br><span class="line">        <span class="comment"># 从外部接收请求后转发到本地的8000端口</span></span><br><span class="line">        <span class="attribute">proxy_pass</span> http://127.0.0.1:8000;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从上面我们就可以明白，nginx 接收到请求后，转发给gunicorn正在监听的本地8000端口，gunicorn根据请求调用项目中相应的应用函数后返回结果。<br>自此我们就基本实现了请求–&gt;DNS–&gt;服务器ip–&gt;nginx（80端口）–&gt;127.0.0.1：8000–&gt;项目wsgi应用<br>而关于nginx和gunicorn的具体配置还有许多，不妨多google一下延伸学习</p>
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h2><p>gunicorn让项目跑起来<br>nginx负责接收请求和转发请求到运行中项目监听请求的端口<br>部署到线上，主要需要域名，公网ip，二者均可以通过云服务器来解决，所以最好还是直接买个云服务器实践一下，just do it</p>
+<p>Python3 同级目录直接import</p>
+<p>不同级目录</p>
+<p>from 目录 import 文件</p>
+<p>ls | grep -v .mp4 | xargs rm -r</p>
+<h2 id="捕获url参数"><a href="#捕获url参数" class="headerlink" title="捕获url参数"></a>捕获url参数</h2><p>进行url匹配时 把需要捕获的部分设置成正则表达式的组<br>Django框架 会自动把组内参数传递给对应视图函数</p>
+<h3 id="1-位置参数-要求顺序"><a href="#1-位置参数-要求顺序" class="headerlink" title="1.位置参数 (要求顺序)"></a>1.位置参数 (要求顺序)</h3><p>使用正则位置参数 视图的形参名可以随意指定<br><code>re_path(r&quot;index(\d+)&quot;, views.index)</code><br>(\d+)内的参数将被传递给index视图函数的形参</p>
+<p>给位置参数必须数量一致，路由中有几个正则组，视图函数中就应该有几个形参，包含自带request参数</p>
+<p>request 包含 用户通过浏览器请求的参数</p>
+<h3 id="2-关键字参数-（可以指定顺序）"><a href="#2-关键字参数-（可以指定顺序）" class="headerlink" title="2.关键字参数 （可以指定顺序）"></a>2.关键字参数 （可以指定顺序）</h3><p><code>re_path(r&quot;index(?P&lt;name&gt;\d+)&quot;, views.index)</code><br><code>(?P&lt;name&gt;\d+)</code>内的参数通过关键字参数传递给视图函数<br>视图函数必须以name命名形参，也就是命名必须一致，此时参数顺序不要求</p>
+<p><strong>小结：</strong>在url正则表达式通过’()‘来匹配传递的参数，如<code>’(\w+)&#39;</code>代表匹配字符串，然后在视图函数的形参中加入对应数量的参数（必须在视图函数的形参中接收），即可在后台接收到传入的参数，他会根据对应的顺序依次赋值。当然我们也可以在匹配参数过程中指定对应的形参名称，如：</p>
+<p><code>url(r&#39;^params_test_reg/str(?P&lt;str&gt;\w+)page(?P&lt;page&gt;\d+)/$&#39;,params_test_reg),</code></p>
+<p>**位置参数与关键字参数不能混用，但是用了一个位置参数时，要求剩下的必须都是位置参数，否则出现 <code>missing 1 required positional argument:</code>错误。</p>
+<p><code>request</code>是一个<code>HttpRquest</code>类型的对象</p>
+<p>request参数是一个WSGIRequest对象<br>WSGIRequest 对象属于django.core.handlers.wsgi.WSGIRequest<br>request对象包含浏览器请求的信息 是将WISG协议中传递给框架的env信息的再次封装</p>
+<h4 id="WSGIRequest对象的属性"><a href="#WSGIRequest对象的属性" class="headerlink" title="WSGIRequest对象的属性"></a>WSGIRequest对象的属性</h4><p><strong>request.path</strong>: 返回字符串 表示请求的路径 不包含域名和参数部分<br><strong>request.method</strong>: 返回字符串 表示HTTP请求的方式 如: “GET” “POST”<br><strong>request.encoding</strong>: 返回字符串 表示请求的编码格式 如果为None表示使用浏览器默认设置utf-8 <strong>注意:这个属性不是只读的如果修改 接下来对属性的访问使用新的encoding值</strong></p>
+<p>可以在templates下新建404.html 和 500.html<br>将使用此模板替代默认404页面、500页面</p>
+<h4 id="QueryDict对象"><a href="#QueryDict对象" class="headerlink" title="QueryDict对象"></a>QueryDict对象</h4><p>WSGIRequest 对象的GET 和POST 属性用来取值<br>request.GET 或 request.POST 是一个 QueryDict 对象<br>QueryDict 对象属于 django.http.request.QueryDict</p>
+<h4 id="创建QueryDict对象"><a href="#创建QueryDict对象" class="headerlink" title="创建QueryDict对象"></a>创建QueryDict对象</h4><p>q = QueryDict(“a=1&amp;a=2&amp;b=3”)</p>
+<h4 id="对QueryDict对象取值"><a href="#对QueryDict对象取值" class="headerlink" title="对QueryDict对象取值"></a>对QueryDict对象取值</h4><p>q[“a”] 返回一个字符串<br>q.get(“b”) 返回一个字符串<br>q.getlist(“a”) 返回一个列表<br>如果取值不存在的键 使用[]取值会报错KeyError 使用get() 返回None 使用getlist 返回空列表</p>
+<h4 id="get-方法设置默认值"><a href="#get-方法设置默认值" class="headerlink" title="get()方法设置默认值"></a>get()方法设置默认值</h4><p>q.get(“d”, “default”) 如果没有d这个Key 会返回字符串default<br>q.getlist(“d”, [1, “2”]) 如果没有d 这个Key 会返回列表[1, “2”]</p>
+<h4 id="QueryDict与普通字典的区别"><a href="#QueryDict与普通字典的区别" class="headerlink" title="QueryDict与普通字典的区别"></a>QueryDict与普通字典的区别</h4><p>QueryDict的Key可以对应多个值<br>q = queryDict(“a=1&amp;a=2&amp;a=3”)<br>用[]和get()取值有多个值的QueryDict对象时 只返回最后一个Key的值<br>q[“a”] 返回 3<br>q.get(“a”) 返回 3<br>如果要对QueryDict取值Key对应的所有值 使用getlist()方法<br>q.getlist(“a”) 返回一个列表[“1”, “2”, “3”]</p>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>Cookie 在访问网站时服务器生成的储存在浏览器的一段文本信息<br>Django中cookie中的值只以字符串形式储存<br>访问服务器时服务器设置一个cookie key为要保存的id值为要保存的信息<br>将cookie发送给浏览器浏览器保存在本地<br>访问服务器时浏览器发送cookie 服务器通过cookie的id取出信息用来判断状态</p>
+<h4 id="Cookie的特点"><a href="#Cookie的特点" class="headerlink" title="Cookie的特点"></a>Cookie的特点</h4><p>request.COOKIES是一个普通的Python字典<br>1.以键值对的方式存储 并且只储存字符串类型的值<br>2.通过浏览器访问网站时 浏览器会将所有跟这个网站相关的Cookie发送给网站<br>3.基于域名安全(不会将其他网站的cookie发给不相关的网站)<br>4.有过期时间 如果不指定时间 默认关闭浏览器后cookie就会过期设置cookie</p>
+<p>通过HttpResponse类的对象或者它的子类的对象<br>使用对象.set_cookie()设置cookie<br>对象.set_cookie(“key”, value, max_age)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">response = HttpResponse(<span class="string">"设置cookie"</span>)</span><br><span class="line">response.set_cookie(<span class="string">"num"</span>, 1)</span><br><span class="line">renturn response</span><br></pre></td></tr></table></figure>
+
+<p>实际是服务器在ResponseHeader里设置了Set-Cookie的值<br>浏览器发现Set-Cookie的值后会在本地存储对应的cookie</p>
+<h4 id="读取cookie"><a href="#读取cookie" class="headerlink" title="读取cookie"></a>读取cookie</h4><p>通过HttpRequest类的对象或者它的子类的对象<br>使用对象.COOKIES[]读取cookie<br>对象.COOKIES[“key”]</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cookie = request.Cookie[<span class="string">"num"</span>]</span><br><span class="line"><span class="keyword">return</span> HttpResponse(cookie)</span><br></pre></td></tr></table></figure>
+
+<p>在读取cookie时 实际是浏览器在RequsetHeader里设置了Cookie的值<br>浏览器将本地保存的有关这个网站的cookie保存在Cookie全部发送给服务器</p>
+<h4 id="Cookie的寿命"><a href="#Cookie的寿命" class="headerlink" title="Cookie的寿命"></a>Cookie的寿命</h4><p>浏览器在保存cookie时默认当浏览器关闭时使cookie过期<br>response.set_cookie(max_age= , expirse= )<br>max_age= 以秒为单位设置cookie过期时间<br>expirse= 以到期日期计算cookie过期时间</p>
+<h2 id="session"><a href="#session" class="headerlink" title="session"></a>session</h2><p>Django的session中可以储存任意类型的数据<br>所有的session信息储存在服务器数据库中的session表中<br>表的主键叫做session_key唯一标示session在表中的位置<br>表的值叫做 session_data储存了设置的session键值对<br>过期时间叫做expire_date储存了session过期日期<br>访问服务器时服务器设置session为数据表创建记录<br>服务器发送一个key为sessionid，值为session_key的cookie给浏览器<br>访问时服务器通过key为sessionid的cookie获得session_key<br>后台再通过session_key在数据库中获得session_data</p>
+<h4 id="session特点"><a href="#session特点" class="headerlink" title="session特点"></a>session特点</h4><p>1.以键值对的方式存储 并且可以储存<strong>任意类型</strong>的值<br>2.依赖于cookie 唯一标识码sessionid就是cookie的key session_key就是cookie的值<br>3.有过期时间 如果不指定 默认两周时间</p>
+<h4 id="设置session"><a href="#设置session" class="headerlink" title="设置session"></a>设置session</h4><p>通过HttpRequest对象的session属性设置和读取session信息<br>保存时类似于给字典添加键值对<br>对象.session[“key”] = value</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.session[<span class="string">"username"</span>] = <span class="string">"smart"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="读取session"><a href="#读取session" class="headerlink" title="读取session"></a>读取session</h4><p>通过HttpRequset对象的session属性读取session信息<br>取值和没有值时的默认值<br>username = 对象.session[“username”]<br>username = 对象.session.get(“key”, 默认值)</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">username = request.session[<span class="string">"username"</span>]</span><br><span class="line">username = request.session.<span class="keyword">get</span>(<span class="string">"username"</span>, <span class="string">"没有数据"</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="session的方法"><a href="#session的方法" class="headerlink" title="session的方法"></a>session的方法</h4><p>session_data在数据表中的状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4b662403cdb5656fdba155811da63a59046fe33a:&#123;<span class="string">"username"</span>:<span class="string">"smart"</span>,<span class="string">"password"</span>:<span class="string">"passwd"</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>删除session值的部分 也就是session_data中括号中的部分<br>对象.session.clear()<br>删除session整条数据 也就是session_data对应的整条数据表记录<br>对象.session.flush()<br>删除session中指定的键值对<br>del 对象.session[“key”]<br>判断session中是否有对应的key<br>对象.session.has_key(“key”)<br>设置会话的超时时间<br>如果不设置值则等同于设置为None<br>对象.session.set_expory(value)</p>
+<ul>
+<li>如果value是一个整数，sessionid的cookie将在value秒后过 session也会在value秒后过期</li>
+<li>如果value为0，sessionid的cookie浏览器关闭时过期 session会在两周后过期</li>
+<li>如果value为None，sessionid的cookie两周后过期 session也会在两周后过期</li>
+</ul>
+<h2 id="cookie和session的应用场景"><a href="#cookie和session的应用场景" class="headerlink" title="cookie和session的应用场景"></a>cookie和session的应用场景</h2><p>cookie: 记住用户名 安全性要求不高<br>session: 银行卡账户 密码 涉及到安全性比较高的数据</p>
+<p><strong>注意：</strong>要使用session还需要密匙种子SECRET_KEY，在app初始化添加进去既可以(app.config[SECRT_KEY] = ‘123WER1245erwrwe&amp;<em>%W34@##</em>&amp;@!)</p>
+<h3 id="日志记录"><a href="#日志记录" class="headerlink" title="日志记录"></a>日志记录</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logger = logging.getLogger(<span class="string">'django'</span>)</span><br><span class="line">logger = logging.getLogger(<span class="string">"console"</span>)</span><br><span class="line">logger.debug(<span class="string">"hello"</span>)</span><br><span class="line">logger.info(<span class="string">'This is an error msg'</span>)</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Tech/"># Tech</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">上一页</a>
+                <span>| </span>
+                <a href="/">主页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/03/25/Anti-hotlinking-technology/">防盗链技术</a>
+            
+            
+            <a class="next" rel="next" href="/2020/03/20/How-to-forbid-an-ip-on-Mac/">如何在Mac上禁止ip</a>
+            
+        </section>
+
+        <br/>
+        
+            <section id="comments" class="comments">
+                <!-- <style>
+                    .comments{margin:30px;padding:10px;background:#fff}
+                    @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+                </style> -->
+              <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//unpkg.com/leancloud-storage@4.12.1/dist/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+      el: '.valine_comment',
+      app_id: 'c4UzW78lv7A03NiPJSxK9ChO-gzGzoHsz',
+      app_key: 'DB4G8lqc5j7magaSEc7uGQby',
+      placeholder: '',
+    });
+</script>
+            </section>
+          
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+
+    <!-- <div class="copyright">
+        <span>© Old zhg | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div> -->
+
+    <div class="copyright">
+        <span>
+            <div>© 2017-2023 <a href="/">Oldzhg</a></div>
+            Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a> · 
+            <a href="https://beian.miit.gov.cn" target="_blank" rel="nofollow">豫ICP备2023012905号</a>
+            <i class="iconfont icon-dian "></i>
+            <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank" rel="nofollow" title="由又拍云提供CDN支持"><img alt="由又拍云提供CDN支持" src=/image/upyun_logos/又拍云_logo5.png style="vertical-align: middle;height: 15px;"></a>
+        </span>
+    </div>
+
+<!--     <div class="statistics">
+        <span>
+            站点浏览统计
+            引入不蒜子
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            开始添加本站访客数
+            <span id="busuanzi_container_site_pv">
+                本站总访问量: <span id="busuanzi_value_site_pv"></span>
+            </span>
+            <span id="busuanzi_container_site_uv">
+                | 本站总访客: <span id="busuanzi_value_site_uv"></span>
+            </span>s
+            添加完成
+            # pv方式，单个用户连续点击 n 篇，记录 n 次记录值
+            # uv方式，单个用户连续点击 n 篇，记录 1 次记录值
+
+            <span class="post-count">
+                | 字数统计:
+            <a href="">24.3k</a>  
+            </span>
+        </span>
+    </div> -->
+
+</footer>
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+    
+    </div>
+</body>
+</html>

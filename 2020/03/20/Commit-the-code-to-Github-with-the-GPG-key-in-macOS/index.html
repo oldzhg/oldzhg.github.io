@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Old zhg">
+
+
+
+
+
+<title>在 macOS 中使用 GPG 密钥提交代码至 Github | 白驹过隙</title>
+
+
+
+    <link rel="icon" href="https://pic.oldzhg.com/uPic/FIKIOQ.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="白驹过隙" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Drizzt&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/categories">分类</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Drizzt&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/categories">分类</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开目录</a>
+        <a onclick="go_top()">回到顶部</a>
+        <a onclick="go_bottom()">前往底部</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "折叠目录"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开目录"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">在 macOS 中使用 GPG 密钥提交代码至 Github</h1>
+            
+                <div class="post-meta">
+                    
+                        作者: <a itemprop="author" rel="author" href="/">Old zhg</a>
+                    
+
+                    
+                        <span class="post-time">
+                        日期: <a href="#">March 20, 2020</a>
+                        </span>
+                    
+                    <br/>
+                        
+                    
+                        <span class="post-count">
+                            字数统计:
+                        <a href="">584</a>  
+                        </span>
+                    
+                    
+                        <span class="post-count">
+                            阅读时长:
+                        <a href="">2 分钟</a>  
+                        </span>
+                    
+                    <!--文章浏览量-->
+                    <!-- 
+                        <span id="busuanzi_container_page_pv">
+                        阅读量
+                        <a href="" id="busuanzi_value_page_pv"></a>
+                    </span>
+                     -->
+                    <!-- 添加完成 -->
+                    
+                        <span class="post-category">
+                    分类:
+                            
+                                <a href="/categories/%E5%B7%A5%E5%85%B7%E6%8A%80%E5%B7%A7/">工具技巧</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>普通的 HTTPS 和 RSA 密钥方式提交代码，并不能判断是谁提交的代码，多人可以使用同一套验证进行提交，而 GPG 密钥就可以避免此问题，可以对提交者进行验证。</p>
+<h2 id="创建密钥"><a href="#创建密钥" class="headerlink" title="创建密钥"></a>创建密钥</h2><h3 id="安装工具"><a href="#安装工具" class="headerlink" title="安装工具"></a>安装工具</h3><p>macOS 上创建密钥需要安装 GPG 命令行工具或者 GUI 工具，下载地址：<a href="https://www.vvave.net/go/aHR0cHM6Ly9ncGd0b29scy5vcmcv" target="_blank" rel="noopener">点击跳转</a>。安装完成后即可使用终端生成 GPG 密钥</p>
+<h3 id="生成密钥对"><a href="#生成密钥对" class="headerlink" title="生成密钥对"></a>生成密钥对</h3><p>创建一个 GPG 密钥对，因为 GPG 有多个版本，因此可能需要查阅官方的支持手册来获得适用的命令，GitHub 适用的密钥必须适用 RSA 密钥且具有 4096 位长度。</p>
+<ul>
+<li>如果使用的是 2.1.17 及以后版本，可以使用下述命令进行生成。</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --full-<span class="keyword">generate</span>-key</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果使用的不是 2.1.17 及以后的版本，可使用以下命令。</li>
+</ul>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --<span class="keyword">default</span>-<span class="keyword">new</span>-<span class="built_in">key</span>-algo rsa4096 --gen-<span class="built_in">key</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>然后根据屏幕提示确认使用的加密方式，默认为 RSA 。接下来确认密钥对强度，选择为 4096。</li>
+<li>输入用户的信息并进行确认。</li>
+<li>输入个安全的密码。</li>
+</ol>
+<h3 id="查看密钥对"><a href="#查看密钥对" class="headerlink" title="查看密钥对"></a>查看密钥对</h3><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">$</span> <span class="comment">gpg</span> --<span class="comment">list</span><span class="literal">-</span><span class="comment">secret</span><span class="literal">-</span><span class="comment">keys</span> --<span class="comment">keyid</span><span class="literal">-</span><span class="comment">format</span> <span class="comment">LONG</span></span><br></pre></td></tr></table></figure>
+
+<p>从列表中即可看到本机存在的全部 GPG 密钥对，假定以 ID 为 3AA5C34371567BD2 的密钥对为例。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --list-secret-keys --keyid-format LONG</span><br><span class="line">/Users/hubot/.gnupg/secring.gpg</span><br><span class="line">------------------------------------</span><br><span class="line">sec   <span class="number">4096</span>R/<span class="number">3</span>AA5C34371567BD2 <span class="number">2016</span><span class="number">-03</span><span class="number">-10</span> [expires: <span class="number">2017</span><span class="number">-03</span><span class="number">-10</span>]</span><br><span class="line">uid                          Hubot </span><br><span class="line">ssb   <span class="number">4096</span>R/<span class="number">42</span>B317FD4BA89E7A <span class="number">2016</span><span class="number">-03</span><span class="number">-10</span></span><br></pre></td></tr></table></figure>
+
+<p>导出密钥对信息</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">$</span> <span class="comment">gpg</span> --<span class="comment">armor</span> --<span class="comment">export</span> <span class="comment">3AA5C34371567BD2</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>小贴士：密钥对信息会以 <code>-----BEGIN PGP PUBLIC KEY BLOCK-----</code> 字符串开头，以 <code>-----END PGP PUBLIC KEY BLOCK-----</code> 字符串结束。</p>
+</blockquote>
+<h2 id="添加密钥"><a href="#添加密钥" class="headerlink" title="添加密钥"></a>添加密钥</h2><p>将复制出来的密钥串粘贴至 GitHub 的密钥页面中，<a href="https://www.vvave.net/go/aHR0cHM6Ly9naXRodWIuY29tL3NldHRpbmdzL2tleXM=" target="_blank" rel="noopener">点击跳转</a>。</p>
+<h2 id="提交代码"><a href="#提交代码" class="headerlink" title="提交代码"></a>提交代码</h2><p>查看本地密钥对</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">$</span> <span class="comment">gpg</span> --<span class="comment">list</span><span class="literal">-</span><span class="comment">secret</span><span class="literal">-</span><span class="comment">keys</span> --<span class="comment">keyid</span><span class="literal">-</span><span class="comment">format</span> <span class="comment">LONG</span></span><br></pre></td></tr></table></figure>
+
+<p>为本地仓库配置 GPG 密钥</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git<span class="built_in"> config </span>--global user.signingkey 3AA5C34371567BD2</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>小贴士：本文以 <code>3AA5C34371567BD2</code> 为例，请输入真实的密钥对 ID。</p>
+</blockquote>
+<p>为当前的项目配置密钥认证</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git<span class="built_in"> config </span>commit.gpgsign <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>为全部项目配置密钥认证</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git<span class="built_in"> config </span>--global commit.gpgsign <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>小贴士：配置后使用提交命令即可在 GitHub 网页中看到 出现 <strong>Verified</strong> 绿色标记。</p>
+</blockquote>
+<p>–</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://www.vvave.net/go/aHR0cHM6Ly9oZWxwLmdpdGh1Yi5jb20vZW4vYXJ0aWNsZXMvZ2VuZXJhdGluZy1hLW5ldy1ncGcta2V5" target="_blank" rel="noopener">Generating a new GPG key - GitHub Help</a></li>
+<li><a href="https://www.vvave.net/go/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTEwNTQzMzMvYXJ0aWNsZS9kZXRhaWxzLzgzOTM0MzA5" target="_blank" rel="noopener">使用 GPG 密钥验证 Github 提交 - CSDN</a></li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Tech/"># Tech</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">上一页</a>
+                <span>| </span>
+                <a href="/">主页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/03/20/How-to-forbid-an-ip-on-Mac/">如何在Mac上禁止ip</a>
+            
+            
+            <a class="next" rel="next" href="/2020/03/19/Linux-change-file-md5/">更改文件 md5</a>
+            
+        </section>
+
+        <br/>
+        
+            <section id="comments" class="comments">
+                <!-- <style>
+                    .comments{margin:30px;padding:10px;background:#fff}
+                    @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+                </style> -->
+              <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//unpkg.com/leancloud-storage@4.12.1/dist/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+      el: '.valine_comment',
+      app_id: 'c4UzW78lv7A03NiPJSxK9ChO-gzGzoHsz',
+      app_key: 'DB4G8lqc5j7magaSEc7uGQby',
+      placeholder: '',
+    });
+</script>
+            </section>
+          
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+
+    <!-- <div class="copyright">
+        <span>© Old zhg | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div> -->
+
+    <div class="copyright">
+        <span>
+            <div>© 2017-2023 <a href="/">Oldzhg</a></div>
+            Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a> · 
+            <a href="https://beian.miit.gov.cn" target="_blank" rel="nofollow">豫ICP备2023012905号</a>
+            <i class="iconfont icon-dian "></i>
+            <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank" rel="nofollow" title="由又拍云提供CDN支持"><img alt="由又拍云提供CDN支持" src=/image/upyun_logos/又拍云_logo5.png style="vertical-align: middle;height: 15px;"></a>
+        </span>
+    </div>
+
+<!--     <div class="statistics">
+        <span>
+            站点浏览统计
+            引入不蒜子
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            开始添加本站访客数
+            <span id="busuanzi_container_site_pv">
+                本站总访问量: <span id="busuanzi_value_site_pv"></span>
+            </span>
+            <span id="busuanzi_container_site_uv">
+                | 本站总访客: <span id="busuanzi_value_site_uv"></span>
+            </span>s
+            添加完成
+            # pv方式，单个用户连续点击 n 篇，记录 n 次记录值
+            # uv方式，单个用户连续点击 n 篇，记录 1 次记录值
+
+            <span class="post-count">
+                | 字数统计:
+            <a href="">24.3k</a>  
+            </span>
+        </span>
+    </div> -->
+
+</footer>
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+    
+    </div>
+</body>
+</html>

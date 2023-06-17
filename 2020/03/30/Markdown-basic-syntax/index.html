@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Old zhg">
+
+
+
+
+
+<title>Markdown基本语法 | 白驹过隙</title>
+
+
+
+    <link rel="icon" href="https://pic.oldzhg.com/uPic/FIKIOQ.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="白驹过隙" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Drizzt&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/categories">分类</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Drizzt&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/categories">分类</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开目录</a>
+        <a onclick="go_top()">回到顶部</a>
+        <a onclick="go_bottom()">前往底部</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "折叠目录"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开目录"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Markdown基本语法</h1>
+            
+                <div class="post-meta">
+                    
+                        作者: <a itemprop="author" rel="author" href="/">Old zhg</a>
+                    
+
+                    
+                        <span class="post-time">
+                        日期: <a href="#">March 30, 2020</a>
+                        </span>
+                    
+                    <br/>
+                        
+                    
+                        <span class="post-count">
+                            字数统计:
+                        <a href="">1.6k</a>  
+                        </span>
+                    
+                    
+                        <span class="post-count">
+                            阅读时长:
+                        <a href="">5 分钟</a>  
+                        </span>
+                    
+                    <!--文章浏览量-->
+                    <!-- 
+                        <span id="busuanzi_container_page_pv">
+                        阅读量
+                        <a href="" id="busuanzi_value_page_pv"></a>
+                    </span>
+                     -->
+                    <!-- 添加完成 -->
+                    
+                        <span class="post-category">
+                    分类:
+                            
+                                <a href="/categories/%E5%B7%A5%E5%85%B7%E6%8A%80%E5%B7%A7/">工具技巧</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Markdown简介"><a href="#Markdown简介" class="headerlink" title="Markdown简介"></a>Markdown简介</h1><p>Markdown是一种纯文本格式的标记语言。通过简单的标记语法，它可以使普通文本内容具有一定的格式。</p>
+<p>相比WYSIWYG编辑器</p>
+<p><strong>优点：</strong><br>1、因为是纯文本，所以只要支持Markdown的地方都能获得一样的编辑效果，可以让作者摆脱排版的困扰，专心写作。<br>2、操作简单。比如:WYSIWYG编辑时标记个标题，先选中内容，再点击导航栏的标题按钮，选择几级标题。要三个步骤。而Markdown只需要在标题内容前加#即可</p>
+<p><strong>缺点：</strong><br>1、需要记一些语法（当然，是很简单。五分钟学会）。<br>2、有些平台不支持Markdown编辑模式。</p>
+<p>还好，简书是支持Markdown编辑模式的。</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开启方式：设置-&gt;默认编辑器-&gt;Markdown编辑器</span><br></pre></td></tr></table></figure>
+
+<h1 id="Markdown基本使用"><a href="#Markdown基本使用" class="headerlink" title="Markdown基本使用"></a>Markdown基本使用</h1><h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>在想要设置为标题的文字前面加#来表示<br>一个#是一级标题，二个#是二级标题，以此类推。支持六级标题。</p>
+<p>注：标准语法一般在#后跟个空格再写文字，貌似简书不加空格也行。</p>
+<p>示例：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 这是一级标题</span><br><span class="line">## 这是二级标题</span><br><span class="line">### 这是三级标题</span><br><span class="line">#### 这是四级标题</span><br><span class="line">##### 这是五级标题</span><br><span class="line">###### 这是六级标题</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><h4 id="这是四级标题"><a href="#这是四级标题" class="headerlink" title="这是四级标题"></a>这是四级标题</h4><h5 id="这是五级标题"><a href="#这是五级标题" class="headerlink" title="这是五级标题"></a>这是五级标题</h5><h6 id="这是六级标题"><a href="#这是六级标题" class="headerlink" title="这是六级标题"></a>这是六级标题</h6><hr>
+<h2 id="段落格式"><a href="#段落格式" class="headerlink" title="段落格式"></a>段落格式</h2><ul>
+<li><h5 id="加粗"><a href="#加粗" class="headerlink" title="加粗"></a>加粗</h5></li>
+</ul>
+<p>要加粗的文字左右分别用两个*号包起来</p>
+<ul>
+<li><h5 id="斜体"><a href="#斜体" class="headerlink" title="斜体"></a>斜体</h5></li>
+</ul>
+<p>要倾斜的文字左右分别用一个*号包起来</p>
+<ul>
+<li><h5 id="斜体加粗"><a href="#斜体加粗" class="headerlink" title="斜体加粗"></a>斜体加粗</h5></li>
+</ul>
+<p>要倾斜和加粗的文字左右分别用三个*号包起来</p>
+<ul>
+<li><h5 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h5></li>
+</ul>
+<p>要加删除线的文字左右分别用两个~~号包起来</p>
+<p>示例：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*<span class="strong">*这是加粗的文字*</span><span class="strong">*</span></span><br><span class="line"><span class="strong">*</span>这是倾斜的文字<span class="strong">*`</span></span><br><span class="line"><span class="strong">*</span>*<span class="strong">*这是斜体加粗的文字*</span>*<span class="strong">*</span></span><br><span class="line"><span class="strong">~~这是加删除线的文字~~</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><strong>这是加粗的文字</strong><br><em>这是倾斜的文字</em><br><strong><em>这是斜体加粗的文字</em></strong><br><del>这是加删除线的文字</del></p>
+<hr>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>在引用的文字前加&gt;即可。引用也可以嵌套，如加两个&gt;&gt;三个&gt;&gt;&gt;<br>n个…<br>貌似可以一直加下去，但没神马卵用</p>
+<p>示例：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;这是引用的内容</span><br><span class="line"><span class="meta">&gt;&gt;</span>这是引用的内容</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;这是引用的内容</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<blockquote>
+<p>这是引用的内容</p>
+<blockquote>
+<p>这是引用的内容</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>这是引用的内容</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>三个或者三个以上的 - 或者 * 都可以。</p>
+<p>示例：</p>
+<p>效果如下：<br>可以看到，显示效果是一样的。</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>语法：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">图片alt</span>](<span class="link">图片地址 ''图片title''</span>)</span><br><span class="line"></span><br><span class="line">图片alt就是显示在图片下面的文字，相当于对图片内容的解释。</span><br><span class="line">图片title是图片的标题，当鼠标移到图片上时显示的内容。title可加可不加</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![blockchain](https:<span class="comment">//ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/</span></span><br><span class="line">u=<span class="number">702257389</span>,<span class="number">1274025419</span>&amp;fm=<span class="number">27</span>&amp;gp=<span class="number">0.</span>jpg <span class="string">"区块链"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="//pic.oldzhg.com/uPic/1j43ZZ.jpg" alt="blockchain"></p>
+<p>上传本地图片直接点击导航栏的图片标志，选择图片即可**</p>
+<p>markdown格式追求的是简单、多平台统一。那么图片的存储就是一个问题，需要用图床，提供统一的外链，这样就不用在不同的平台去处理图片的问题了。才能做到书写一次，各处使用。<br>关于图床的选择我写了一篇文章，对网上存在的各种方法做了总结，需要的朋友可以看看。<a href="https://www.jianshu.com/p/ea1eb11db63f" target="_blank" rel="noopener">markdown图床</a></p>
+<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>语法：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">超链接名</span>](<span class="link">超链接地址 "超链接title"</span>)</span><br><span class="line">title可加可不加</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">简书</span>](<span class="link">http://jianshu.com</span>)</span><br><span class="line">[<span class="string">百度</span>](<span class="link">http://baidu.com</span>)</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><a href="https://www.jianshu.com/u/1f5ac0cf6a8b" target="_blank" rel="noopener">简书</a><br><a href="https://links.jianshu.com/go?to=http%3A%2F%2Fbaidu.com" target="_blank" rel="noopener">百度</a></p>
+<p>注：Markdown本身语法不支持链接在新页面中打开，貌似简书做了处理，是可以的。别的平台可能就不行了，如果想要在新页面中打开的话可以用html语言的a标签代替。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;a <span class="attribute">href</span>=<span class="string">"超链接地址"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;超链接名&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">示例</span><br><span class="line">&lt;a <span class="attribute">href</span>=<span class="string">"https://www.jianshu.com/u/1f5ac0cf6a8b"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;简书&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><p>语法：<br>无序列表用 - + * 任何一种都可以</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>列表内容</span><br><span class="line"><span class="bullet">+ </span>列表内容</span><br><span class="line"><span class="bullet">* </span>列表内容</span><br><span class="line"></span><br><span class="line">注意：- + * 跟内容之间都要有一个空格</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<ul>
+<li>列表内容</li>
+<li>列表内容</li>
+<li>列表内容</li>
+</ul>
+<h2 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h2><p>语法：<br>数字加点</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 列表内容</span><br><span class="line"><span class="number">2.</span> 列表内容</span><br><span class="line"><span class="number">3.</span> 列表内容</span><br><span class="line"></span><br><span class="line">注意：序号跟内容之间要有空格</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<ol>
+<li>列表内容</li>
+<li>列表内容</li>
+<li>列表内容</li>
+</ol>
+<h2 id="列表嵌套"><a href="#列表嵌套" class="headerlink" title="列表嵌套"></a>列表嵌套</h2><p><strong>上一级和下一级之间敲三个空格即可</strong></p>
+<ul>
+<li><p>一级无序列表内容</p>
+<ul>
+<li>二级无序列表内容</li>
+<li>二级无序列表内容</li>
+<li>二级无序列表内容</li>
+</ul>
+</li>
+<li><p>一级无序列表内容</p>
+<ol>
+<li>二级有序列表内容</li>
+<li>二级有序列表内容</li>
+<li>二级有序列表内容</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li><p>一级有序列表内容</p>
+<ul>
+<li>二级无序列表内容</li>
+<li>二级无序列表内容</li>
+<li>二级无序列表内容</li>
+</ul>
+</li>
+<li><p>一级有序列表内容</p>
+<ol>
+<li>二级有序列表内容</li>
+<li>二级有序列表内容</li>
+<li>二级有序列表内容</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>语法：</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">表头|<span class="string">表头</span>|<span class="string">表头</span></span><br><span class="line"><span class="string">---</span>|<span class="string">:--:</span>|<span class="string">---:</span></span><br><span class="line"><span class="string">内容</span>|<span class="string">内容</span>|<span class="string">内容</span></span><br><span class="line"><span class="string">内容</span>|<span class="string">内容</span>|<span class="string">内容</span></span><br><span class="line"></span><br><span class="line"><span class="string">第二行分割表头和内容。</span></span><br><span class="line"><span class="string">- 有一个就行，为了对齐，多加了几个</span></span><br><span class="line"><span class="string">文字默认居左</span></span><br><span class="line"><span class="string">-两边加：表示文字居中</span></span><br><span class="line"><span class="string">-右边加：表示文字居右</span></span><br><span class="line"><span class="string">注：原生的语法两边都要用 </span>|<span class="string"> 包起来。此处省略</span></span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">姓名|<span class="string">技能</span>|<span class="string">排行</span></span><br><span class="line"><span class="string">--</span>|<span class="string">:--:</span>|<span class="string">--:</span></span><br><span class="line"><span class="string">刘备</span>|<span class="string">哭</span>|<span class="string">大哥</span></span><br><span class="line"><span class="string">关羽</span>|<span class="string">打</span>|<span class="string">二哥</span></span><br><span class="line"><span class="string">张飞</span>|<span class="string">骂</span>|<span class="string">三弟</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th>技能</th>
+<th>排行</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>刘备</td>
+<td>哭</td>
+<td>大哥</td>
+</tr>
+<tr>
+<td>关羽</td>
+<td>打</td>
+<td>二哥</td>
+</tr>
+<tr>
+<td>张飞</td>
+<td>骂</td>
+<td>三弟</td>
+</tr>
+</tbody></table>
+<p>语法：<br>单行代码：代码之间分别用一个反引号包起来</p>
+<p>代码块：代码之间分别用三个反引号包起来，且两边的反引号单独占一行</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(```)</span><br><span class="line">  代码...</span><br><span class="line">  代码...</span><br><span class="line">  代码...</span><br><span class="line">(```)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注：为了防止转译，前后三个反引号处加了小括号，实际是没有的。这里只是用来演示，实际中去掉两边小括号即可。</p>
+</blockquote>
+<p>示例：</p>
+<p>单行代码</p>
+<p>代码块</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(```)</span><br><span class="line">    function <span class="function"><span class="title">fun</span><span class="params">()</span></span>&#123;</span><br><span class="line">         echo <span class="string">"这是一句非常牛逼的代码"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">fun</span><span class="params">()</span></span>;</span><br><span class="line">(```)</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p>单行代码</p>
+<p><code>create database hero;</code></p>
+<p>代码块</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function <span class="function"><span class="title">fun</span><span class="params">()</span></span>&#123;</span><br><span class="line">  echo <span class="string">"这是一句非常牛逼的代码"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">fun</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h2><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: 开始</span><br><span class="line">op=&gt;operation: My Operation</span><br><span class="line">cond=&gt;condition: Yes <span class="keyword">or</span> No?</span><br><span class="line">e=&gt;end</span><br><span class="line">st-&gt;op-&gt;cond</span><br><span class="line">cond<span class="function"><span class="params">(<span class="literal">yes</span>)</span>-&gt;</span>e</span><br><span class="line">cond<span class="function"><span class="params">(<span class="literal">no</span>)</span>-&gt;</span>op</span><br><span class="line">&amp;``<span class="javascript"><span class="string">`</span></span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：    </p>
+<p><img src="//pic.oldzhg.com/uPic/ugJWHL.png" alt="流程图.png"></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Tech/"># Tech</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">上一页</a>
+                <span>| </span>
+                <a href="/">主页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/08/06/VuePress/">VuePress</a>
+            
+            
+            <a class="next" rel="next" href="/2020/03/28/Introduction-of-SSH-tunneling-technology/">SSH隧道技术简介端口转发&SOCKS代理</a>
+            
+        </section>
+
+        <br/>
+        
+            <section id="comments" class="comments">
+                <!-- <style>
+                    .comments{margin:30px;padding:10px;background:#fff}
+                    @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+                </style> -->
+              <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//unpkg.com/leancloud-storage@4.12.1/dist/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+      el: '.valine_comment',
+      app_id: 'c4UzW78lv7A03NiPJSxK9ChO-gzGzoHsz',
+      app_key: 'DB4G8lqc5j7magaSEc7uGQby',
+      placeholder: '',
+    });
+</script>
+            </section>
+          
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+
+    <!-- <div class="copyright">
+        <span>© Old zhg | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div> -->
+
+    <div class="copyright">
+        <span>
+            <div>© 2017-2023 <a href="/">Oldzhg</a></div>
+            Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a> · 
+            <a href="https://beian.miit.gov.cn" target="_blank" rel="nofollow">豫ICP备2023012905号</a>
+            <i class="iconfont icon-dian "></i>
+            <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank" rel="nofollow" title="由又拍云提供CDN支持"><img alt="由又拍云提供CDN支持" src=/image/upyun_logos/又拍云_logo5.png style="vertical-align: middle;height: 15px;"></a>
+        </span>
+    </div>
+
+<!--     <div class="statistics">
+        <span>
+            站点浏览统计
+            引入不蒜子
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            开始添加本站访客数
+            <span id="busuanzi_container_site_pv">
+                本站总访问量: <span id="busuanzi_value_site_pv"></span>
+            </span>
+            <span id="busuanzi_container_site_uv">
+                | 本站总访客: <span id="busuanzi_value_site_uv"></span>
+            </span>s
+            添加完成
+            # pv方式，单个用户连续点击 n 篇，记录 n 次记录值
+            # uv方式，单个用户连续点击 n 篇，记录 1 次记录值
+
+            <span class="post-count">
+                | 字数统计:
+            <a href="">24.3k</a>  
+            </span>
+        </span>
+    </div> -->
+
+</footer>
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+    
+    </div>
+</body>
+</html>

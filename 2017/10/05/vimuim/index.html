@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Old zhg">
+
+
+
+
+
+<title>Vimuim的一些常用快捷键 | 白驹过隙</title>
+
+
+
+    <link rel="icon" href="https://pic.oldzhg.com/uPic/FIKIOQ.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="白驹过隙" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Drizzt&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/categories">分类</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Drizzt&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/categories">分类</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开目录</a>
+        <a onclick="go_top()">回到顶部</a>
+        <a onclick="go_bottom()">前往底部</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "折叠目录"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开目录"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Vimuim的一些常用快捷键</h1>
+            
+                <div class="post-meta">
+                    
+                        作者: <a itemprop="author" rel="author" href="/">Old zhg</a>
+                    
+
+                    
+                        <span class="post-time">
+                        日期: <a href="#">October 5, 2017</a>
+                        </span>
+                    
+                    <br/>
+                        
+                    
+                        <span class="post-count">
+                            字数统计:
+                        <a href="">290</a>  
+                        </span>
+                    
+                    
+                        <span class="post-count">
+                            阅读时长:
+                        <a href="">1 分钟</a>  
+                        </span>
+                    
+                    <!--文章浏览量-->
+                    <!-- 
+                        <span id="busuanzi_container_page_pv">
+                        阅读量
+                        <a href="" id="busuanzi_value_page_pv"></a>
+                    </span>
+                     -->
+                    <!-- 添加完成 -->
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a><strong>常用</strong></h2><ul>
+<li>J ，gT 上一个标签</li>
+<li>K ，gt 下一个标签</li>
+<li>k 向上滚动</li>
+<li>j 向下滚动 </li>
+<li>gg 回到页面最顶端</li>
+<li>G 回到页面最底部</li>
+<li>d 向上翻屏</li>
+<li>u 向下翻屏</li>
+<li>复制链接后，小写p在当前页面打开，* 大写P在新标签页打开</li>
+<li>o查找书签，历史</li>
+</ul>
+<ul>
+<li><p>f 显示当前可点击所有超链接</p>
+</li>
+<li><p>t 创建一个新的标签页</p>
+</li>
+<li><p>T 查看当前所有标签页</p>
+</li>
+<li><p>h 向左移动</p>
+</li>
+<li><p>l 向右移动</p>
+</li>
+<li><p>zH 最左  zL最右</p>
+</li>
+<li><p>？ 显示帮助</p>
+</li>
+<li><p>/ 查找 输入文字后enter n 向下查找</p>
+</li>
+<li><p>F6 当前标签页输入新网址 同ctrl+l</p>
+</li>
+<li><p>r 刷新</p>
+</li>
+<li><p>x 关闭当前页面</p>
+</li>
+<li><p>X 恢复刚刚关闭的页面</p>
+</li>
+<li><p>O 在新窗口打开  网页，历史，书签</p>
+</li>
+<li><p>v 还在学习</p>
+</li>
+</ul>
+<h2 id="非常用"><a href="#非常用" class="headerlink" title="非常用"></a><strong>非常用</strong></h2><ul>
+<li>gs 查看页面源代码</li>
+<li>yy 拷贝当前页面url</li>
+<li>i 输入模式，屏蔽一切命令，esc以取消</li>
+<li>f 在当前页面打开一个新的链接</li>
+<li>F 在新的页面的开一个新的链接</li>
+<li>b 在当前页面打开一个书签</li>
+<li>gf 循环到当前页面的下一个框层</li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Tech/"># Tech</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">上一页</a>
+                <span>| </span>
+                <a href="/">主页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2017/12/22/build-ss/">virmach 上搭建 ss + bbr</a>
+            
+            
+        </section>
+
+        <br/>
+        
+            <section id="comments" class="comments">
+                <!-- <style>
+                    .comments{margin:30px;padding:10px;background:#fff}
+                    @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+                </style> -->
+              <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//unpkg.com/leancloud-storage@4.12.1/dist/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+      el: '.valine_comment',
+      app_id: 'c4UzW78lv7A03NiPJSxK9ChO-gzGzoHsz',
+      app_key: 'DB4G8lqc5j7magaSEc7uGQby',
+      placeholder: '',
+    });
+</script>
+            </section>
+          
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+
+    <!-- <div class="copyright">
+        <span>© Old zhg | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div> -->
+
+    <div class="copyright">
+        <span>
+            <div>© 2017-2023 <a href="/">Oldzhg</a></div>
+            Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a> · 
+            <a href="https://beian.miit.gov.cn" target="_blank" rel="nofollow">豫ICP备2023012905号</a>
+            <i class="iconfont icon-dian "></i>
+            <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank" rel="nofollow" title="由又拍云提供CDN支持"><img alt="由又拍云提供CDN支持" src=/image/upyun_logos/又拍云_logo5.png style="vertical-align: middle;height: 15px;"></a>
+        </span>
+    </div>
+
+<!--     <div class="statistics">
+        <span>
+            站点浏览统计
+            引入不蒜子
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            开始添加本站访客数
+            <span id="busuanzi_container_site_pv">
+                本站总访问量: <span id="busuanzi_value_site_pv"></span>
+            </span>
+            <span id="busuanzi_container_site_uv">
+                | 本站总访客: <span id="busuanzi_value_site_uv"></span>
+            </span>s
+            添加完成
+            # pv方式，单个用户连续点击 n 篇，记录 n 次记录值
+            # uv方式，单个用户连续点击 n 篇，记录 1 次记录值
+
+            <span class="post-count">
+                | 字数统计:
+            <a href="">24.3k</a>  
+            </span>
+        </span>
+    </div> -->
+
+</footer>
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+    
+    </div>
+</body>
+</html>

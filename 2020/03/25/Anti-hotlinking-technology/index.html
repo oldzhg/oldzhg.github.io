@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Old zhg">
+
+
+
+
+
+<title>防盗链技术 | 白驹过隙</title>
+
+
+
+    <link rel="icon" href="https://pic.oldzhg.com/uPic/FIKIOQ.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="白驹过隙" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Drizzt&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/categories">分类</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Drizzt&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/categories">分类</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开目录</a>
+        <a onclick="go_top()">回到顶部</a>
+        <a onclick="go_bottom()">前往底部</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "折叠目录"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开目录"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">防盗链技术</h1>
+            
+                <div class="post-meta">
+                    
+                        作者: <a itemprop="author" rel="author" href="/">Old zhg</a>
+                    
+
+                    
+                        <span class="post-time">
+                        日期: <a href="#">March 25, 2020</a>
+                        </span>
+                    
+                    <br/>
+                        
+                    
+                        <span class="post-count">
+                            字数统计:
+                        <a href="">2.1k</a>  
+                        </span>
+                    
+                    
+                        <span class="post-count">
+                            阅读时长:
+                        <a href="">7 分钟</a>  
+                        </span>
+                    
+                    <!--文章浏览量-->
+                    <!-- 
+                        <span id="busuanzi_container_page_pv">
+                        阅读量
+                        <a href="" id="busuanzi_value_page_pv"></a>
+                    </span>
+                     -->
+                    <!-- 添加完成 -->
+                    
+                        <span class="post-category">
+                    分类:
+                            
+                                <a href="/categories/%E5%B7%A5%E5%85%B7%E6%8A%80%E5%B7%A7/">工具技巧</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="基础防盗链"><a href="#基础防盗链" class="headerlink" title="基础防盗链"></a>基础防盗链</h1><p>主要是对客户端请求所携带的一些关键信息来验证请求的合法性，比如客户端请求IP，请求URL中携带的Referer。优点是规则简单，缺点是这些信息都可以伪造，可靠性较低。</p>
+<h2 id="IP访问控制"><a href="#IP访问控制" class="headerlink" title="IP访问控制"></a>IP访问控制</h2><p>IP地址在互联网上具有唯一性，我们可以针对异常的请求客户端的IP进行限制，以达到访问控制的目的。<br>    1. 支持对一个或多个IP的访问控制<br>    2. 针对IP段进行限制<br>    3. 对区域进行访问限制</p>
+<h2 id="Referer防盗链"><a href="#Referer防盗链" class="headerlink" title="Referer防盗链"></a>Referer防盗链</h2><p>Referer在HTTP协议中有特殊的用途，当浏览器向服务端发送请求时会带Referer头，告知该请求是从哪个链接来的。常用于页面访问统计，图片的防盗链。</p>
+<p>流媒体直播同样适用，当发送请求到达CDN服务器后，CDN服务器检查客户URL中是否有符合预先规定的Referer，来决定禁止或允许该请求。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>应特别指明空引用的处理方式，即该请求头中没有携带Referer头部，通常是直接在浏览器访问该URL或通过非浏览器的方式访问时，请求头不会带有Referer头部，默认采用禁止空引用的方式，当然可以自定义规则。</li>
+<li>Refer很容易伪造，因此Referer防盗链安全性较低</li>
+</ol>
+<h1 id="高级防盗链"><a href="#高级防盗链" class="headerlink" title="高级防盗链"></a>高级防盗链</h1><p>流媒体直播中，常采用时间戳防盗链、swf防盗链、回源鉴权防盗链等方式。时间戳防盗链的特点是加密的URL具有时效性，无法伪造，当到达过期时间后URL不再被允许访问，适合一些对“时效性”有要求的场景。使用时间戳防盗链需要内容提供商和CDN服务商配合，内容提供商负责生成加密的URL，CDN服务商负责根据预先设定的规则对URL进行合理化验证。时间戳是由于实现原理简单、可靠性高、推荐使用。</p>
+<p>swf防盗链为RTMP协议所特有，其特点为客户需要提前将swf文件上传到CDN节点，有客户端和CDN节点在请求过程中基于规定的算法进行加密和解密验证，CDN验证通过则响应该请求，验证失败则拒绝。</p>
+<p>回源鉴权的特点是CDN节点每次接收到的请求，都需要先回源进行验证，验证通过才认为请求合法，继续提供服务，适用于对防盗链有很高的实时性要求的场景。另外，一些具有特殊性的防盗链，CDN默认不支持的情况下也可以考虑采用回源鉴权的形式。</p>
+<h2 id="时间戳防盗链"><a href="#时间戳防盗链" class="headerlink" title="时间戳防盗链"></a>时间戳防盗链</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><ol>
+<li>当用户发起请求视频播放时，用户的请求会被引导至客户端源站。例如，终端用户发送的请求URL为：<a href="http://www.example.com/test.flv" target="_blank" rel="noopener">http://www.example.com/test.flv</a></li>
+<li>源站通过一系列参数共同加密生成一串密文wsSecret。</li>
+<li>终端用户利用源站返回的URL，重新向服务商CDN发起请求。</li>
+<li>服务商CDN节点进行验证，请求是否过期以及加密穿是否匹配。</li>
+</ol>
+<p>目前服务商支持绝对时间和相对时间两种方式的时间戳防盗链控制。</p>
+<ul>
+<li><p>绝对时间控制方式原理如下：<br>此方式用于生成密文的参数有过期时间wsTime、请求直播流、服务商key、ip地址串。假设过期时间为：4d024e80，用户请求的直播流为：test.flv，服务商key为：abc，ip请求地址为：192.168.2.1，对以上数据进行md5加密，得到一个md5密文，假设该密文为a1b2，则源站返回给用户的URL为：<a href="http://cdn.example.com/test.flv?wsSecret=a1b2&amp;wsTime=4d024e80" target="_blank" rel="noopener">http://cdn.example.com/test.flv?wsSecret=a1b2&amp;wsTime=4d024e80</a><br>终端用户利用该URL重新向服务商节点发起请求。<br>服务商进行验证：</p>
+<ol>
+<li>根据过期时间wsTime和当前时间进行比较，确认请求是否过期。</li>
+<li>根据约定的md5计算方式和密文，计算出md5加密串后和url中原始的加密串进行比较。<br>只有1和2都验证通过，请求才会被认为是合法的。不合法的请求可以采取禁止访问或者302重定向到指定的url。</li>
+</ol>
+</li>
+<li><p>相对时间控制方式原理如下：<br>与绝对时间控制方式相比，相对时间控制方式使用参数keepTime和wsTime来共同决定过期时间，wsTime表示终端用户向源站请求url时，源站的机器时间，keepTime表示url 有效的时间长度，以秒为单位，以十六进制或十进制表示，同时keeptime作为参数加入加密串的计算。<br>例如： rtmp://rtmpup4.pstatp.com/live/xxxxxx/xxxx?wsSecret=xxx&amp;keeptime=7200&amp;wsTime=xxx<br>服务商节点判断该URL请求是否过期，方式如下：</p>
+</li>
+</ul>
+<ul>
+<li>若当前时间 - wsTime &lt; keepTime 时，表示URL请求未过期；</li>
+<li>若当前时间 - wsTime &gt;= keeptime ，表示URL请求已过期；</li>
+<li>若keepTime为空，则按照发布点配置的默认过期时间来进行判断（如5分钟）。同样，相对时间控制方式除校验有效期之外，也需要校验md5加密串是否匹配。</li>
+</ul>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ol>
+<li>确认时间的表示格式。默认采用的是Unix时间戳的形式，比如1371982466表示时间是2013-06-23 18:14:26，支持其他一些时间表达格式，比如：<ul>
+<li>20130623181426</li>
+<li>2013-06-23</li>
+<li>51c6ca82（推荐此表示方式，将十进制的1371982466采用16进制表示，有较好的隐蔽性）</li>
+</ul>
+</li>
+<li>需要确认使用绝对时间还是相对时间控制方式，使用相对时间控制的话还需要确认是否需要使用keepTime，不使用keepTime需要与客户确认默认配置的过期时长。</li>
+<li>确认参与md5计算的相关参数，以及组合顺序。</li>
+</ol>
+<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><ol>
+<li>时间戳防盗链默认支持，可以直接配置，不需要再次开发</li>
+<li>当防盗链涉及的参数发生变更时，需要通知CDN进行配合更改，原则上密文一旦确定尽量不要发生变动，不然可能导致源和加速节点使用的密文不一致，请求全部验证不通过</li>
+<li>使用IP进行md5计算可能带来一些问题：如果用户发送请求加密使用的IP1，而到CDN这边用的是另外一个IP2，这样就会被禁止访问。这在从4G切换到Wi-Fi时极易容易发生。</li>
+</ol>
+<h2 id="回源鉴权防盗链"><a href="#回源鉴权防盗链" class="headerlink" title="回源鉴权防盗链"></a>回源鉴权防盗链</h2><h3 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h3><ol>
+<li>终端用户向CDN请求视频内容，在请求中携带需要回源鉴权的参数。例如：  <a href="http://www.test.com/live/channel.flv?key1=vaule1&key2=vaule2" target="_blank" rel="noopener">http://www.test.com/live/channel.flv?key1=vaule1&amp;key2=vaule2</a> </li>
+<li>CDN节点可通过POST或者GET方式向用户鉴权服务器返回需要鉴权的参数，鉴权参数需要用户提前告知CDN。</li>
+<li>鉴权服务器根据CDN传送而来的鉴权信息，进行防盗链判断，决定是否允许用户请求该直播视频，并将结果返回给CDN节点。</li>
+<li>CDN节点根据客户鉴权服务器返回的结果，响应或者拒绝终端用户的视频请求。</li>
+</ol>
+<h3 id="应用场景举例："><a href="#应用场景举例：" class="headerlink" title="应用场景举例："></a>应用场景举例：</h3><ol>
+<li>客户技术实力比较强，又不希望第三方公司知悉其防盗链原理时，可使用回源鉴权防盗链。</li>
+<li>CDN无法满足客户特殊防盗链需求时，可使用回源鉴权防盗链。</li>
+</ol>
+<h3 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h3><ol>
+<li>告知CDN，回源鉴权的参数</li>
+<li>告知CDN，鉴权服务器地址。</li>
+<li>告知CDN，回源鉴权的方式，目前支持get及post两种</li>
+<li>告知CDN，鉴权结果，例如1代表成功，0代表失败</li>
+<li>告知CDN，超时等待时间，及超时如何处理，例如，鉴权服务器3S不响应，就同意请求，或拒绝请求。</li>
+</ol>
+<h3 id="注意事项：-1"><a href="#注意事项：-1" class="headerlink" title="注意事项："></a>注意事项：</h3><ol>
+<li>每次请求都需要先进行鉴权，在请求量较大时，需要考虑鉴权服务器的压力</li>
+<li>该鉴权形式客户需要维护专门的鉴权服务器。</li>
+</ol>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Tech/"># Tech</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">上一页</a>
+                <span>| </span>
+                <a href="/">主页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/03/28/Introduction-of-SSH-tunneling-technology/">SSH隧道技术简介端口转发&SOCKS代理</a>
+            
+            
+            <a class="next" rel="next" href="/2020/03/23/Django-study-notes/">Django学习笔记</a>
+            
+        </section>
+
+        <br/>
+        
+            <section id="comments" class="comments">
+                <!-- <style>
+                    .comments{margin:30px;padding:10px;background:#fff}
+                    @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+                </style> -->
+              <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//unpkg.com/leancloud-storage@4.12.1/dist/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+      el: '.valine_comment',
+      app_id: 'c4UzW78lv7A03NiPJSxK9ChO-gzGzoHsz',
+      app_key: 'DB4G8lqc5j7magaSEc7uGQby',
+      placeholder: '',
+    });
+</script>
+            </section>
+          
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+
+    <!-- <div class="copyright">
+        <span>© Old zhg | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div> -->
+
+    <div class="copyright">
+        <span>
+            <div>© 2017-2023 <a href="/">Oldzhg</a></div>
+            Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a> · 
+            <a href="https://beian.miit.gov.cn" target="_blank" rel="nofollow">豫ICP备2023012905号</a>
+            <i class="iconfont icon-dian "></i>
+            <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank" rel="nofollow" title="由又拍云提供CDN支持"><img alt="由又拍云提供CDN支持" src=/image/upyun_logos/又拍云_logo5.png style="vertical-align: middle;height: 15px;"></a>
+        </span>
+    </div>
+
+<!--     <div class="statistics">
+        <span>
+            站点浏览统计
+            引入不蒜子
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            开始添加本站访客数
+            <span id="busuanzi_container_site_pv">
+                本站总访问量: <span id="busuanzi_value_site_pv"></span>
+            </span>
+            <span id="busuanzi_container_site_uv">
+                | 本站总访客: <span id="busuanzi_value_site_uv"></span>
+            </span>s
+            添加完成
+            # pv方式，单个用户连续点击 n 篇，记录 n 次记录值
+            # uv方式，单个用户连续点击 n 篇，记录 1 次记录值
+
+            <span class="post-count">
+                | 字数统计:
+            <a href="">24.3k</a>  
+            </span>
+        </span>
+    </div> -->
+
+</footer>
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+    
+    </div>
+</body>
+</html>

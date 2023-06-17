@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Old zhg">
+
+
+
+
+
+<title>Docker 在Mac上安装SQL Server 2017 | 白驹过隙</title>
+
+
+
+    <link rel="icon" href="https://pic.oldzhg.com/uPic/FIKIOQ.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="白驹过隙" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Drizzt&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/categories">分类</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Drizzt&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/categories">分类</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">展开目录</a>
+        <a onclick="go_top()">回到顶部</a>
+        <a onclick="go_bottom()">前往底部</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "折叠目录"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "展开目录"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Docker 在Mac上安装SQL Server 2017</h1>
+            
+                <div class="post-meta">
+                    
+                        作者: <a itemprop="author" rel="author" href="/">Old zhg</a>
+                    
+
+                    
+                        <span class="post-time">
+                        日期: <a href="#">June 13, 2019</a>
+                        </span>
+                    
+                    <br/>
+                        
+                    
+                        <span class="post-count">
+                            字数统计:
+                        <a href="">508</a>  
+                        </span>
+                    
+                    
+                        <span class="post-count">
+                            阅读时长:
+                        <a href="">2 分钟</a>  
+                        </span>
+                    
+                    <!--文章浏览量-->
+                    <!-- 
+                        <span id="busuanzi_container_page_pv">
+                        阅读量
+                        <a href="" id="busuanzi_value_page_pv"></a>
+                    </span>
+                     -->
+                    <!-- 添加完成 -->
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p> 一、镜像安装</p>
+<p>1、从Docker库中拉取镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker pull microsoft/mssql-server-linux:2017-latest1</span><br></pre></td></tr></table></figure>
+
+<p>2、拉取完之后，运行该镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -e <span class="string">'ACCEPT_EULA=Y'</span> -e <span class="string">'MSSQL_SA_PASSWORD=1234qwer!'</span> \</span><br><span class="line">   -p 1401:1433 --name sql1 \</span><br><span class="line">   -d microsoft/mssql-server-linux:2017-latest123</span><br></pre></td></tr></table></figure>
+
+<p>可以运行多个镜像，保证端口好不一样，name不一样<br><code>-p 1402:1434 --name sql2</code></p>
+<p><img src="//pic.oldzhg.com/uPic/S9duGP.jpg" alt="这里写图片描述"></p>
+<p>3、要查看您的Docker容器，请使用该docker ps命令。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">sudo</span> docker ps -<span class="built_in">a1</span></span><br></pre></td></tr></table></figure>
+
+<p>4、更改SA密码</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo docker exec -<span class="literal">it</span> sql1 /opt/mssql-tools/bin/sqlcmd <span class="string">\</span></span><br><span class="line">   -S localhost -U SA -P <span class="string">'1234qwer!'</span> <span class="string">\</span></span><br><span class="line">   -Q <span class="string">'ALTER LOGIN sa WITH PASSWORD="1234qwer!"'</span><span class="number">123</span></span><br></pre></td></tr></table></figure>
+
+<p>5、连接到SQL Server</p>
+<ol>
+<li>使用该docker exec -it命令在正在运行的容器中启动交互式bash shell。在以下示例sql1中–name，创建容器时由参数指定的名称。</li>
+</ol>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker exec -<span class="keyword">it</span> sql1 <span class="string">"bash"</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>一旦进入容器，用sqlcmd本地连接。Sqlcmd默认不在路径中，因此您必须指定完整路径。</li>
+</ol>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/opt/m</span>ssql-tools<span class="regexp">/bin/</span>sqlcmd -S localhost -U SA -P <span class="string">'1234qwer!'</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>如果成功，您应该到达sqlcmd命令提示符：1&gt;。</p>
+<p>6、使用外部数据库连接工具来连接数据库<br><img src="//pic.oldzhg.com/uPic/JZn2ww.jpg" alt="这里写图片描述"></p>
+<p>IP地址是电脑主机的地址，后面要跟<code>,1401</code></p>
+<h3 id="二、还原数据库"><a href="#二、还原数据库" class="headerlink" title="二、还原数据库"></a>二、还原数据库</h3><p>1、创建镜像sql1的文件目录</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">sudo</span> docker exec -<span class="keyword">it </span>sql1 mkdir /var/<span class="meta">opt</span>/mssql/<span class="keyword">backup1</span></span><br></pre></td></tr></table></figure>
+
+<p>2、拷贝文件</p>
+<blockquote>
+<p>可以将bak文件放到用户主目录下面</p>
+</blockquote>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">sudo</span> docker <span class="meta">cp</span> CZSBGL3.<span class="keyword">bak </span>sql1:/var/<span class="meta">opt</span>/mssql/<span class="keyword">backup1</span></span><br></pre></td></tr></table></figure>
+
+<p>3、还原数据库</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> 还原bak文件</span><br><span class="line">sudo docker exec -it sql1 <span class="regexp">/opt/m</span>ssql-tools<span class="regexp">/bin/</span>sqlcmd -S localhost \</span><br><span class="line">   -U SA -P <span class="string">'1234qwer!'</span> \</span><br><span class="line">   -Q <span class="string">'RESTORE FILELISTONLY FROM DISK = "/var/opt/mssql/backup/CZSBGL3.bak"'</span> \</span><br><span class="line">   | tr -s <span class="string">' '</span> | cut -d <span class="string">' '</span> -f <span class="number">1</span>-<span class="number">212345</span></span><br></pre></td></tr></table></figure>
+
+<p>你应看到类似于下面的输出：<br><img src="//pic.oldzhg.com/uPic/i7WRk0.png" alt="这里写图片描述"></p>
+<p>4、调用RESTORE DATABASE命令才能还原在容器内的数据库。 为每个文件上一步中指定新路径。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd \</span><br><span class="line">   -S localhost -U SA -P '1234qwer!' \</span><br><span class="line">   -Q '<span class="keyword">RESTORE</span> <span class="keyword">DATABASE</span> CZSBGL3 <span class="keyword">FROM</span> DISK = <span class="string">"/var/opt/mssql/backup/CZSBGL3.bak"</span> <span class="keyword">WITH</span> <span class="keyword">MOVE</span> <span class="string">"CZSBGL_NEW"</span> <span class="keyword">TO</span> <span class="string">"/var/opt/mssql/data/CZSBGL3.mdf"</span>, <span class="keyword">MOVE</span> <span class="string">"CZSBGL_NEW_log"</span> <span class="keyword">TO</span> <span class="string">"/var/opt/mssql/data/CZSBGL3.ldf"</span><span class="string">'123</span></span><br></pre></td></tr></table></figure>
+
+<p>你应看到类似于下面的输出：<br><img src="//pic.oldzhg.com/uPic/6ygzws.png" alt="这里写图片描述"></p>
+<p>再次连接数据库，你应该能看到数据库列表。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Tech/"># Tech</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">上一页</a>
+                <span>| </span>
+                <a href="/">主页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/10/03/Certbot%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">Certbot使用教程</a>
+            
+            
+            <a class="next" rel="next" href="/2018/11/24/Mac%E4%BF%AE%E6%94%B9%E4%B8%BB%E6%9C%BA%E5%90%8D%E5%92%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%90%8D/">Mac修改主机名和计算机名</a>
+            
+        </section>
+
+        <br/>
+        
+            <section id="comments" class="comments">
+                <!-- <style>
+                    .comments{margin:30px;padding:10px;background:#fff}
+                    @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+                </style> -->
+              <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//unpkg.com/leancloud-storage@4.12.1/dist/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+      el: '.valine_comment',
+      app_id: 'c4UzW78lv7A03NiPJSxK9ChO-gzGzoHsz',
+      app_key: 'DB4G8lqc5j7magaSEc7uGQby',
+      placeholder: '',
+    });
+</script>
+            </section>
+          
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+
+    <!-- <div class="copyright">
+        <span>© Old zhg | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div> -->
+
+    <div class="copyright">
+        <span>
+            <div>© 2017-2023 <a href="/">Oldzhg</a></div>
+            Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a> · 
+            <a href="https://beian.miit.gov.cn" target="_blank" rel="nofollow">豫ICP备2023012905号</a>
+            <i class="iconfont icon-dian "></i>
+            <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank" rel="nofollow" title="由又拍云提供CDN支持"><img alt="由又拍云提供CDN支持" src=/image/upyun_logos/又拍云_logo5.png style="vertical-align: middle;height: 15px;"></a>
+        </span>
+    </div>
+
+<!--     <div class="statistics">
+        <span>
+            站点浏览统计
+            引入不蒜子
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            开始添加本站访客数
+            <span id="busuanzi_container_site_pv">
+                本站总访问量: <span id="busuanzi_value_site_pv"></span>
+            </span>
+            <span id="busuanzi_container_site_uv">
+                | 本站总访客: <span id="busuanzi_value_site_uv"></span>
+            </span>s
+            添加完成
+            # pv方式，单个用户连续点击 n 篇，记录 n 次记录值
+            # uv方式，单个用户连续点击 n 篇，记录 1 次记录值
+
+            <span class="post-count">
+                | 字数统计:
+            <a href="">24.3k</a>  
+            </span>
+        </span>
+    </div> -->
+
+</footer>
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+    
+    </div>
+</body>
+</html>
